@@ -1,0 +1,7 @@
+[
+    {
+        "keys": ["shift+alt+v"],
+        "command": "paste_as_string",
+        "args": {}
+    }
+]

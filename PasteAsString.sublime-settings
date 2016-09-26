@@ -1,9 +1,13 @@
 {
+    // example string in clipboard:
+    // SELECT field1
+    // FROM "table"
+    // WHERE field2 = 'string'
     "scopes":[
         {
             // js
             // String sql = "SELECT field1 \n"
-            //            + "FROM table \n"
+            //            + "FROM \"table\" \n"
             //            + "WHERE field2 = 'string'";
             "scope": "source.js",
             "before_string":"var str = \"",
@@ -11,87 +15,94 @@
             "line_start":"+ \"",
             "line_terminator":" \\\\n\"\n",
             "description":"Paste as string JavaScript",
+            "esc_chr":"\\",
         },
         {
             // java
             // String sql = "SELECT field1 \n"
-            //            + "FROM table \n"
+            //            + "FROM \"table\" \n"
             //            + "WHERE field2 = 'string'";
             "scope": "source.java",
             "before_string":"String sql = \"",
             "after_string":"\";",
             "line_start":"+ \"",
             "line_terminator":" \\\\n\"\n",
+            "esc_chr":"\\",
         },
         {
             // vbs
             // Dim sql As String
             // sql = "SELECT field1 " + char(10) _
-            //  + "FROM table " + char(10) _
+            //  + "FROM ""table"" " + char(10) _
             //  + "WHERE field2 = 'string'"
             "scope": "source.vbs",
             "before_string":"Dim sql As String\nsql = \"",
             "after_string":"\"",
             "line_start":"+ \"",
             "line_terminator":" \"+ char(10) _\n",
+            "esc_chr":"\"",
         },
         {
             // source.cs
             // string sql = "SELECT field1 \n"
-            //            + "FROM table \n"
+            //            + "FROM \"table\" \n"
             //            + "WHERE field2 = 'string'";
             "scope": "source.cs",
             "before_string":"string sql = \"",
             "after_string":"\";",
             "line_start":"+ \"",
             "line_terminator":" \\\\n\"\n",
+            "esc_chr":"\\",
         },
         {
             // source.perl
             // bad 'string'
             // $sql = 'SELECT field1 \n'
-            //      . 'FROM table \n'
-            //      . 'WHERE field2 = 'string'';
+            //      . 'FROM "table" \n'
+            //      . 'WHERE field2 = \'string\'';
             "scope": "source.perl",
             "before_string":"$sql = '",
             "after_string":"';",
             "line_start":". '",
             "line_terminator":" \\\\n'\n",
+            "esc_chr":"\\",
         },
         {
             // embedding.php
             // $sql = "SELECT field1 \n"
-            //      . "FROM table \n"
+            //      . "FROM \"table\" \n"
             //      . "WHERE field2 = 'string'";
             "scope": "embedding.php",
             "before_string":"$sql = \"",
             "after_string":"\";",
             "line_start":". \"",
             "line_terminator":" \\\\n\"\n",
+            "esc_chr":"\\",
         },
         {
             // source.ruby
-            // bad 'string'
             // sql = 'SELECT field1 \n'
-            //    << 'FROM table \n'
-            //    << 'WHERE field2 = 'string''
+            //    << 'FROM "table" \n'
+            //    << 'WHERE field2 = ''string'''
             "scope": "source.ruby",
             "before_string":"sql = '",
             "after_string":"'",
             "line_start":"<< '",
             "line_terminator":" \\\\n'\n",
+            "esc_chr":"'",
         },
         {
             // source.c++
             // std::string sql;
             // sql = "SELECT field1 \n"
-            //           + "FROM table \n"
+            //           + "FROM \"table\" \n"
             //           + "WHERE field2 = 'string'";
             "scope": "source.c++",
             "before_string":"std::string sql;\nsql = \"",
             "after_string":"\";",
             "line_start":"+ \"",
             "line_terminator":" \\\\n\"\n",
+            "esc_chr":"\\",
         }
     ]
 }

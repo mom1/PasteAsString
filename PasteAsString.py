@@ -19,6 +19,11 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
             if not stext:
                 return
 
+            m = re.search(r"(\"|“|”|')", scope['before_string'].split('\n')[-1], flags=re.IGNORECASE)
+            if m is not None:
+                esc = m.group(1)
+                reg = r'%s%s' % (scope.get('esc_chr', r''), esc)
+                stext = re.sub(r'(' + esc + r')', reg, stext, flags=re.IGNORECASE)
             stext = re.sub(r"\n", scope['line_terminator'] + scope['line_start'], stext, flags=re.IGNORECASE)
             stext = re.sub(r"$", scope['after_string'], stext, flags=re.IGNORECASE)
             for s in view.sel():
@@ -48,7 +53,6 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
         return isvis
 
     def description(self):
-        # 'Вставить как строку'
         global global_settings
         view = self.view
         sel = view.sel()[0]
