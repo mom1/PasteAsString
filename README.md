@@ -16,6 +16,7 @@ Default settings for languages:
 + Ruby
 + VBS
 
+And it is very easy to set up other
 
 Usage
 -----
@@ -52,9 +53,6 @@ Installation
 
 1.  Clone or download this package
 2.  Put it into your Packages directory (find using 'Preferences' -> 'Browse Packages...')
-
-ST3 only:
-  [Sublime Text 3]: http://www.sublimetext.com/3
 
 Credits
 -----
