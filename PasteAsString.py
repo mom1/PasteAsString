@@ -1,6 +1,11 @@
-import re
+# -*- coding: utf-8 -*-
+# @Author: mom1
+# @Date:   2016-09-26 19:59:18
+# @Last Modified by:   mom1
+# @Last Modified time: 2016-10-04 11:51:13
 import sublime
 import sublime_plugin
+from PasteAsString.tools import make_string
 
 global global_settings
 
@@ -19,13 +24,6 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
             if not stext:
                 return
 
-            m = re.search(r"(\"|“|”|')", scope['before_string'].split('\n')[-1], flags=re.IGNORECASE)
-            if m is not None:
-                esc = m.group(1)
-                reg = r'%s%s' % (scope.get('esc_chr', r''), esc)
-                stext = re.sub(r'(' + esc + r')', reg, stext, flags=re.IGNORECASE)
-            stext = re.sub(r"\n", scope['line_terminator'] + scope['line_start'], stext, flags=re.IGNORECASE)
-            stext = re.sub(r"$", scope['after_string'], stext, flags=re.IGNORECASE)
             for s in view.sel():
                 line = view.line(s.begin())
                 for_begin = len(view.substr(sublime.Region(line.begin(), s.begin())))
@@ -35,10 +33,8 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
                 if len_bef_symbol < 0:
                     len_bef_symbol = 0
 
-                stext_ident = re.sub(r"\n", r'\n' + ' ' * len_bef_symbol, stext, flags=re.IGNORECASE)
-                stext_ident_begin = re.sub(r"\n", r'\n' + ' ' * for_begin, scope['before_string'], flags=re.IGNORECASE)
-                stext_ident = re.sub(r"^", stext_ident_begin, stext_ident, flags=re.IGNORECASE)
-                view.replace(edit, s, stext_ident)
+                text_for_paste = make_string(scope, stext, len_bef_symbol, for_begin)
+                view.replace(edit, s, text_for_paste)
 
     def is_visible(self):
         global global_settings
