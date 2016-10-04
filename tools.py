@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: mom1
 # @Date:   2016-10-04 10:39:21
-# @Last Modified by:   mom1
-# @Last Modified time: 2016-10-04 19:34:29
+# @Last Modified by:   MOM
+# @Last Modified time: 2016-10-04 22:04:39
 import re
 
 
@@ -33,7 +33,7 @@ def make_string(scope, text, for_begin=0):
     text = re.sub(r"$", scope.get('after_string', ''), text, flags=re.IGNORECASE)
 
     len_bef_symbol = for_begin + \
-        len(scope['before_string'].split('\n')[-1]) - len(scope['line_start'])
+        len(scope.get('before_string', '').split('\n')[-1]) - len(scope.get('line_start', ''))
     if len_bef_symbol < 0:
         len_bef_symbol = 0
 
