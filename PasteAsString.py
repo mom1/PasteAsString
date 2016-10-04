@@ -2,7 +2,7 @@
 # @Author: mom1
 # @Date:   2016-09-26 19:59:18
 # @Last Modified by:   mom1
-# @Last Modified time: 2016-10-04 11:51:13
+# @Last Modified time: 2016-10-04 19:22:57
 import sublime
 import sublime_plugin
 from PasteAsString.tools import make_string
@@ -27,13 +27,8 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
             for s in view.sel():
                 line = view.line(s.begin())
                 for_begin = len(view.substr(sublime.Region(line.begin(), s.begin())))
-                len_bef_symbol = for_begin + \
-                    len(scope['before_string'].split('\n')[-1]) - len(scope['line_start'])
 
-                if len_bef_symbol < 0:
-                    len_bef_symbol = 0
-
-                text_for_paste = make_string(scope, stext, len_bef_symbol, for_begin)
+                text_for_paste = make_string(scope, stext, for_begin)
                 view.replace(edit, s, text_for_paste)
 
     def is_visible(self):
