@@ -2,7 +2,7 @@
 # @Author: mom1
 # @Date:   2016-09-26 19:59:18
 # @Last Modified by:   mom1
-# @Last Modified time: 2016-10-04 19:22:57
+# @Last Modified time: 2016-11-07 14:35:32
 import sublime
 import sublime_plugin
 from PasteAsString.tools import make_string
@@ -18,7 +18,7 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
         view = self.view
         sel = view.sel()[0]
         for scope in scopes:
-            if scope['scope'] not in view.scope_name(sel.begin()):
+            if not view.match_selector(sel.begin(), scope['scope']):
                 continue
             stext = sublime.get_clipboard()
             if not stext:
@@ -38,7 +38,7 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
         scopes = global_settings.get('scopes', [])
         isvis = False
         for scope in scopes:
-            if scope['scope'] in view.scope_name(sel.begin()):
+            if view.match_selector(sel.begin(), scope['scope']):
                 isvis = True
                 break
         return isvis
@@ -50,7 +50,7 @@ class PasteAsStringCommand(sublime_plugin.TextCommand):
         s_descr = 'Paste as String'
         scopes = global_settings.get('scopes', [])
         for scope in scopes:
-            if scope['scope'] in view.scope_name(sel.begin()):
+            if view.match_selector(sel.begin(), scope['scope']):
                 s_descr = scope.get('description', 'Paste as ' + scope['scope'].split('.')[-1])
         return s_descr
 

@@ -6,7 +6,7 @@
     "scopes":[
         {
             // js
-            // String sql = "SELECT field1 \n"
+            // var str = "SELECT field1 \n"
             //            + "FROM \"table\" \n"
             //            + "WHERE field2 = 'string'";
             "scope": "source.js",
