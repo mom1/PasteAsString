@@ -2,7 +2,7 @@
 # @Author: mom1
 # @Date:   2016-09-26 19:59:18
 # @Last Modified by:   mom1
-# @Last Modified time: 2016-11-07 14:35:32
+# @Last Modified time: 2017-02-20 18:00:06
 import sublime
 import sublime_plugin
 from PasteAsString.tools import make_string
